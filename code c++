@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+// Hàm hoán đổi hai giá trị
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Hàm phân loại quốc kỳ Hà Lan để sắp xếp các màu
+void dutchNationalFlag(int arr[], int n) {
+    int low = 0;      // Trỏ đến vị trí của màu đỏ (0)
+    int mid = 0;      // Trỏ đến vị trí của màu trắng (1)
+    int high = n - 1; // Trỏ đến vị trí của màu xanh (2)
+
+    while (mid <= high) {
+        if (arr[mid] == 0) { // Nếu là màu đỏ
+            swap(&arr[low], &arr[mid]);
+            low++;
+            mid++;
+        } else if (arr[mid] == 1) { // Nếu là màu trắng
+            mid++;
+        } else { // Nếu là màu xanh
+            swap(&arr[mid], &arr[high]);
+            high--;
+        }
+    }
+}
+
+int main() {
+    // 0: đỏ, 1: trắng, 2: xanh
+    int arr[] = {2, 0, 2, 0, 0, 1, 0, 2, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Dãy màu trước khi sắp xếp: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    dutchNationalFlag(arr, n);
+
+    printf("\nDãy màu sau khi sắp xếp: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
